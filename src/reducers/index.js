@@ -1,5 +1,5 @@
 // @flow
 
-import counters from "./counters";
+import game from "./game";
 
-export default { counters };
+export default { game };

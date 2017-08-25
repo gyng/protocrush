@@ -7,18 +7,10 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import thunkMiddleware from "redux-thunk";
 
-import createHistory from "history/createBrowserHistory";
-import { Route } from "react-router-dom";
-import {
-  ConnectedRouter,
-  routerReducer,
-  routerMiddleware
-} from "react-router-redux";
-
-import App from "components/App";
+import App from "containers/App";
 import reducers from "reducers";
 
-import s from "styles/style.scss";
+import "styles/style.scss";
 
 // Redux devtools are still enabled in production!
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -27,13 +19,9 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     })
   : compose;
 
-const appReducer = combineReducers({
-  ...reducers,
-  router: routerReducer
-});
+const appReducer = combineReducers(reducers);
 
-const history = createHistory();
-const middleware = [thunkMiddleware, routerMiddleware(history)];
+const middleware = [thunkMiddleware];
 
 const store = createStore(
   appReducer,
@@ -42,11 +30,7 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <div>
-        <Route path="/" component={App} className={s.app} />
-      </div>
-    </ConnectedRouter>
+    <App />
   </Provider>,
   document.getElementById("root")
 );

@@ -1,9 +1,38 @@
 // @flow
 
-export type CountersState = { value: number };
+export type Vec3 = {
+  x: number,
+  y: number,
+  z: number,
+  w?: number
+};
 
-export type State = { counters: CountersState };
+export type Vec4 = {
+  x: number,
+  y: number,
+  z: number,
+  w: number
+};
+
+export type PositionComponent = Vec4;
+export type PhysicsComponent = {
+  acc: Vec4,
+  friction: number,
+  spd: Vec4
+};
+
+export type Component = PositionComponent | PhysicsComponent;
+
+export type Entity = {
+  cs: { [key: string]: Component }
+};
+
+export type GameState = {
+  es: Array<Entity>
+};
+
+export type State = { game: GameState };
 
 export type Action =
-  | { type: "INCREMENT", value: number }
-  | { type: "DECREMENT", value: number };
+  | { type: "ADD_ENTITY", e: Entity }
+  | { type: "PROCESS_POSITIONS", dt: number };
