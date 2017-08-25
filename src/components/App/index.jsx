@@ -36,6 +36,7 @@ export default class App extends React.Component {
 
     // test
     const entity: Entity = {
+      id: "test1",
       cs: {
         pos: Vec4(10, 10, 10, 10),
         phy: {

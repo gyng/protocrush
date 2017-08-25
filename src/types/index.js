@@ -24,9 +24,12 @@ export type PhysicsComponent = {
 export type Component = PositionComponent | PhysicsComponent;
 
 export type Entity = {
+  id: string,
   cs: { [key: string]: Component }
 };
 
+// Convert this to an object for easier lookup by AI systems?
+// eg. enemies face hero
 export type GameState = {
   es: Array<Entity>
 };
